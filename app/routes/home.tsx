@@ -12,10 +12,15 @@ import {
 import { blue } from "@ant-design/colors";
 
 import type { FormProps } from "antd";
-import { typedjson, useTypedLoaderData } from "remix-typedjson";
+import {
+  typedjson,
+  useTypedLoaderData,
+  useTypedActionData,
+} from "remix-typedjson";
+import { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useActionData } from "@remix-run/react";
 import { PrismaClient } from "@prisma/client";
 import { TodoItem } from "@prisma/client";
 
@@ -26,12 +31,23 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const loader = async () => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  // console.log(request);
   const prisma = new PrismaClient();
 
   const todoItems = await prisma.todoItem.findMany();
 
   return typedjson(todoItems);
+};
+
+export const action = async ({ request }: ActionFunctionArgs) => {
+  console.log(request);
+  // Formのデータを取得
+  const formData = await request.formData();
+  const email = String(formData.get("email"));
+  const password = String(formData.get("email"));
+
+  return json({ aaa: "aaa" });
 };
 
 type FieldType = {
@@ -46,6 +62,8 @@ export const TodoItemForm = (props: { item: TodoItem }) => {
     console.log("Success:", values);
   };
 
+  const aaa = useTypedActionData<typeof action>();
+
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
     errorInfo
   ) => {
@@ -58,11 +76,12 @@ export const TodoItemForm = (props: { item: TodoItem }) => {
       <Form
         name={props.item.id}
         form={form}
+        method="post"
         // labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 600 }}
         // initialValues={{ remember: true }}
-        onFinish={onFinish}
+        // onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
         initialValues={{
