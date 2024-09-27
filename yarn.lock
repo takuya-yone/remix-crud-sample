@@ -8060,12 +8060,24 @@ __metadata:
     prisma: "npm:5.20.0"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
+    remix-typedjson: "npm:^0.4.1"
     tailwindcss: "npm:^3.4.13"
     typescript: "npm:^5.6.2"
     vite: "npm:^5.4.8"
     vite-tsconfig-paths: "npm:^5.0.1"
   languageName: unknown
   linkType: soft
+
+"remix-typedjson@npm:^0.4.1":
+  version: 0.4.1
+  resolution: "remix-typedjson@npm:0.4.1"
+  peerDependencies:
+    "@remix-run/react": ^1.16.0 || ^2.0
+    "@remix-run/server-runtime": ^1.16.0 || ^2.0
+    react: ^17.0.2 || ^18.0.0
+  checksum: 10c0/ef479d3b35576bcdc2753fed8749edcb18f0a1bb37579792604f078176cb36ca9bee8d4e260463af2b910cad3af4c23e878275f2b985a5c55a71e9ede419b7ec
+  languageName: node
+  linkType: hard
 
 "require-like@npm:>= 0.1.1":
   version: 0.1.2
