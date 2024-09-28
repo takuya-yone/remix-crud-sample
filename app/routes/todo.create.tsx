@@ -2,9 +2,9 @@ import { useEffect, useRef } from "react";
 import type { MetaFunction, LoaderFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
-import { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
+import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 
-export let meta: MetaFunction = () => {
+export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
     { name: "description", content: "Welcome to Remix!" },
@@ -24,6 +24,7 @@ export async function action({ request }: ActionFunctionArgs) {
   //     },
   //   });
   //   await prisma.$disconnect();
+  console.log("sadfasdf");
   return json({ result: "OK" });
 }
 export default function Page() {

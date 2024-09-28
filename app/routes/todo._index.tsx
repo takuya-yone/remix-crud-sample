@@ -1,28 +1,19 @@
 import type { MetaFunction } from "@remix-run/node";
-import {
-  DatePicker,
-  Typography,
-  Form,
-  Input,
-  Button,
-  Checkbox,
-  Card,
-  Switch,
-} from "antd";
-import { blue } from "@ant-design/colors";
 
-import type { FormProps } from "antd";
+import { Form } from "@remix-run/react";
+
 import {
   typedjson,
   useTypedLoaderData,
   useTypedActionData,
 } from "remix-typedjson";
-import { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
+import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 
 import { json } from "@remix-run/node";
 import { useLoaderData, useActionData } from "@remix-run/react";
 import { PrismaClient } from "@prisma/client";
-import { TodoItem } from "@prisma/client";
+import type { TodoItem } from "@prisma/client";
+import { Typography, TextField, Button } from "@mui/material";
 
 export const meta: MetaFunction = () => {
   return [
@@ -50,78 +41,22 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   return json({ aaa: "aaa" });
 };
 
-type FieldType = {
-  title: string;
-  comment: string;
-  complete: boolean;
-};
-
 export const TodoItemForm = (props: { item: TodoItem }) => {
-  const [form] = Form.useForm();
-  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log("Success:", values);
-  };
-
-  const aaa = useTypedActionData<typeof action>();
-
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
-    errorInfo
-  ) => {
-    console.log("Failed:", errorInfo);
-  };
-
   return (
     // <Typography>{props.item.title}</Typography>
-    <Card style={{ backgroundColor: blue[0] }}>
-      <Form
-        name={props.item.id}
-        form={form}
-        method="post"
-        // labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
-        // initialValues={{ remember: true }}
-        // onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-        initialValues={{
-          title: props.item.title,
-          comment: props.item.comment,
-          complete: props.item.complete,
-          id: props.item.id,
-        }}
-      >
-        <Form.Item<FieldType>
-          label="Title"
-          name="title"
-          rules={[{ required: true, message: "Please input Title!" }]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item<FieldType>
-          label="Comment"
-          name="comment"
-          // rules={[{ required: true, message: "Please input !" }]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item<FieldType>
-          name="complete"
-          label="complete"
-          wrapperCol={{ offset: 8, span: 16 }}
-        >
-          <Switch />
-        </Form.Item>
-
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
+    <div>
+      <Form method="post" name="form3" id="form3" className="remix__form">
+        <TextField
+          required
+          id="outlined-required"
+          label="Required"
+          defaultValue={props.item.title}
+        />
+        <Button type="submit" color="success" variant="contained">
+          Submitttt
+        </Button>
       </Form>
-    </Card>
+    </div>
   );
 };
 
@@ -136,7 +71,7 @@ export default function Index() {
             Welcome to <span className="sr-only">Remix</span>
           </h1>
         </header>
-        <Typography.Text code>{JSON.stringify(todoItems)}</Typography.Text>
+        <Typography color="black">{JSON.stringify(todoItems)}</Typography>
         {todoItems.map((item, index) => {
           return (
             <div key={item.id}>
@@ -145,7 +80,6 @@ export default function Index() {
           );
         })}
         <div className="h-[144px] w-[434px]">
-          <DatePicker />
           <img
             src="/logo-light.png"
             alt="Remix"
