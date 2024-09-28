@@ -8,12 +8,14 @@ import {
   useTypedActionData,
 } from "remix-typedjson";
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 import { json } from "@remix-run/node";
 import { useLoaderData, useActionData } from "@remix-run/react";
 import { PrismaClient } from "@prisma/client";
 import type { TodoItem } from "@prisma/client";
-import { Typography, TextField, Button } from "@mui/material";
+import { Typography, TextField, Button, Checkbox, Switch } from "@mui/material";
 
 export const meta: MetaFunction = () => {
   return [
@@ -32,11 +34,10 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
-  console.log(request);
+  // console.log(request);
   // Formのデータを取得
   const formData = await request.formData();
-  const email = String(formData.get("email"));
-  const password = String(formData.get("email"));
+  console.log(formData);
 
   return json({ aaa: "aaa" });
 };
@@ -45,15 +46,34 @@ export const TodoItemForm = (props: { item: TodoItem }) => {
   return (
     // <Typography>{props.item.title}</Typography>
     <div>
-      <Form method="post" name="form3" id="form3" className="remix__form">
+      <Form method="post" navigate={false}>
+        <input type="hidden" id="Id" name="id" value={props.item.id} />
+
         <TextField
           required
-          id="outlined-required"
-          label="Required"
+          label="Title"
           defaultValue={props.item.title}
+          name="title"
         />
-        <Button type="submit" color="success" variant="contained">
-          Submitttt
+        <TextField
+          label="Comment"
+          defaultValue={props.item.comment}
+          name="comment"
+        />
+        {/* <Checkbox name="completed" defaultChecked={props.item.complete} /> */}
+        <Switch
+          name="completed"
+          value="commpleted"
+          defaultChecked={props.item.complete}
+        />
+
+        <Button
+          type="submit"
+          color="success"
+          value="truaaae"
+          variant="contained"
+        >
+          Submit
         </Button>
       </Form>
     </div>
