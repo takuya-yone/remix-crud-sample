@@ -135,28 +135,28 @@ export default function Index() {
           <h1 className="leading text-2xl font-bold text-gray-800 dark:text-gray-100">
             Welcome to <span className="sr-only">Remix</span>
           </h1>
-          <Typography.Text code>{JSON.stringify(todoItems)}</Typography.Text>
-          {todoItems.map((item, index) => {
-            return (
-              <div key={item.id}>
-                <TodoItemForm item={item} />
-              </div>
-            );
-          })}
-          <div className="h-[144px] w-[434px]">
-            <DatePicker />
-            <img
-              src="/logo-light.png"
-              alt="Remix"
-              className="block w-full dark:hidden"
-            />
-            <img
-              src="/logo-dark.png"
-              alt="Remix"
-              className="hidden w-full dark:block"
-            />
-          </div>
         </header>
+        <Typography.Text code>{JSON.stringify(todoItems)}</Typography.Text>
+        {todoItems.map((item, index) => {
+          return (
+            <div key={item.id}>
+              <TodoItemForm item={item} />
+            </div>
+          );
+        })}
+        <div className="h-[144px] w-[434px]">
+          <DatePicker />
+          <img
+            src="/logo-light.png"
+            alt="Remix"
+            className="block w-full dark:hidden"
+          />
+          <img
+            src="/logo-dark.png"
+            alt="Remix"
+            className="hidden w-full dark:block"
+          />
+        </div>
         <nav className="flex flex-col items-center justify-center gap-4 rounded-3xl border border-gray-200 p-6 dark:border-gray-700">
           <p className="leading-6 text-gray-700 dark:text-gray-200">
             What&apos;s next?
