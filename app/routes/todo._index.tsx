@@ -10,6 +10,7 @@ import {
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { useState } from "react";
 
 import { json } from "@remix-run/node";
 import { useLoaderData, useActionData } from "@remix-run/react";
@@ -27,8 +28,8 @@ export const meta: MetaFunction = () => {
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   // console.log(request);
   const prisma = new PrismaClient();
-
   const todoItems = await prisma.todoItem.findMany();
+  await prisma.$disconnect();
 
   return typedjson(todoItems);
 };
@@ -37,14 +38,35 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   // console.log(request);
   // Formのデータを取得
   const formData = await request.formData();
+
+  const prisma = new PrismaClient();
+
+  // if (!formData.get("id")) return;
   console.log(formData);
 
-  return json({ aaa: "aaa" });
+  const newTodoItem = {
+    id: String(formData.get("id")),
+    title: String(formData.get("title")),
+    comment: String(formData.get("comment")),
+    complete: String(formData.get("completed")) === "on",
+  };
+
+  const result = await prisma.todoItem.update({
+    where: { id: newTodoItem.id },
+    data: newTodoItem,
+  });
+  await prisma.$disconnect();
+  console.log(newTodoItem);
+
+  console.log(result);
+
+  return json({ aaa: "bbb" });
 };
 
 export const TodoItemForm = (props: { item: TodoItem }) => {
+  const [completed, setCompleted] = useState(props.item.complete);
+
   return (
-    // <Typography>{props.item.title}</Typography>
     <div>
       <Form method="post" navigate={false}>
         <input type="hidden" id="Id" name="id" value={props.item.id} />
@@ -60,12 +82,7 @@ export const TodoItemForm = (props: { item: TodoItem }) => {
           defaultValue={props.item.comment}
           name="comment"
         />
-        {/* <Checkbox name="completed" defaultChecked={props.item.complete} /> */}
-        <Switch
-          name="completed"
-          value="commpleted"
-          defaultChecked={props.item.complete}
-        />
+        <Switch name="completed" defaultChecked={completed} />
 
         <Button
           type="submit"
