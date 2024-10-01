@@ -1,0 +1,10 @@
+services:
+  remix:
+    build: .
+    image: 767397894835.dkr.ecr.ap-northeast-1.amazonaws.com/remix:latest
+    # image: 767397894835.dkr.ecr.ap-northeast-1.amazonaws.com/pankration2024-image-lambda-repo-prod:latest
+    # platform: linux/x86_64
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
