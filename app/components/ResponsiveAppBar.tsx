@@ -1,4 +1,16 @@
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from "@ant-design/icons";
+import {
+  CameraOutlined,
+  DatabaseOutlined,
+  HomeOutlined,
+  InfoCircleOutlined,
+  MailOutlined,
+  PushpinOutlined,
+  QuestionCircleOutlined,
+  SolutionOutlined,
+  StarOutlined,
+  TeamOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import { useState } from "react";
@@ -8,48 +20,85 @@ type MenuItem = Required<MenuProps>["items"][number];
 export const ResponsiveAppBar = () => {
   const items: MenuItem[] = [
     {
-      label: "Navigation One",
-      key: "mail",
-      icon: <MailOutlined />,
+      label: "Home",
+      key: "home",
+      icon: <HomeOutlined />,
     },
     {
-      label: "Navigation Two",
-      key: "app",
-      icon: <AppstoreOutlined />,
-      disabled: true,
-    },
-    {
-      label: "Navigation Three - Submenu",
-      key: "SubMenu",
-      icon: <SettingOutlined />,
+      label: "About",
+      key: "about",
+      icon: <InfoCircleOutlined />,
+
       children: [
-        {
-          type: "group",
-          label: "Item 1",
-          children: [
-            { label: "Option 1", key: "setting:1" },
-            { label: "Option 2", key: "setting:2" },
-          ],
-        },
-        {
-          type: "group",
-          label: "Item 2",
-          children: [
-            { label: "Option 3", key: "setting:3" },
-            { label: "Option 4", key: "setting:4" },
-          ],
-        },
+        { label: "Event", key: "setting:1" },
+        { label: "Welcome", key: "setting:2" },
+        { label: "Stamp Rally", key: "setting:2" },
+        { label: "Scholorship", key: "setting:2" },
       ],
     },
     {
-      key: "alipay",
-      icon: <SettingOutlined />,
+      label: "Session",
+      key: "session",
+      icon: <DatabaseOutlined />,
 
-      label: (
-        <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-          Navigation Four - Link
-        </a>
-      ),
+      children: [
+        { label: "Timetable", key: "setting:1" },
+        { label: "List", key: "setting:2" },
+        { label: "Call for X", key: "setting:2" },
+        { label: "Ticket", key: "setting:2" },
+      ],
+    },
+    {
+      label: "Floor Map",
+      key: "floormap",
+      icon: <PushpinOutlined />,
+    },
+    {
+      label: "Supporter",
+      key: "Supporter",
+      icon: <TeamOutlined />,
+
+      children: [
+        { label: "個人サポーター紹介", key: "setting:1" },
+        { label: "企業サポーター募集", key: "setting:2" },
+        { label: "個人サポーター紹介", key: "setting:2" },
+        { label: "個人サポーター募集", key: "setting:2" },
+      ],
+    },
+    {
+      label: "Staff",
+      key: "staff",
+      icon: <UserOutlined />,
+
+      children: [
+        { label: "実行委員", key: "setting:1" },
+        { label: "ボランティアスタッフ募集", key: "setting:2" },
+      ],
+    },
+    {
+      label: "Privacy Policy",
+      key: "policy",
+      icon: <MailOutlined />,
+    },
+    {
+      label: "Promotion",
+      key: "Promotion",
+      icon: <StarOutlined />,
+    },
+    {
+      label: "Follow Up",
+      key: "followup",
+      icon: <SolutionOutlined />,
+    },
+    {
+      label: "Photos",
+      key: "photos",
+      icon: <CameraOutlined />,
+    },
+    {
+      label: "FAQ",
+      key: "faq",
+      icon: <QuestionCircleOutlined />,
     },
   ];
   const [current, setCurrent] = useState("mail");
@@ -61,7 +110,14 @@ export const ResponsiveAppBar = () => {
 
   return (
     <div className="bg-slate-200">
-      <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
+      <Menu
+        style={{ minWidth: 0, flex: "auto" }}
+        // className="w-full"
+        onClick={onClick}
+        selectedKeys={[current]}
+        mode="horizontal"
+        items={items}
+      />
     </div>
   );
 };
