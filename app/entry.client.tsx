@@ -4,11 +4,11 @@
  * For more information, see https://remix.run/file-conventions/entry.client
  */
 
-import { RemixBrowser } from "@remix-run/react";
-import { startTransition, StrictMode } from "react";
-import { hydrateRoot } from "react-dom/client";
-import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
+import { CacheProvider } from "@emotion/react";
+import { RemixBrowser } from "@remix-run/react";
+import { StrictMode, startTransition } from "react";
+import { hydrateRoot } from "react-dom/client";
 
 function createEmotionCache() {
   return createCache({ key: "css" });
@@ -23,6 +23,6 @@ startTransition(() => {
       <CacheProvider value={cache}>
         <RemixBrowser />
       </CacheProvider>
-    </StrictMode>
+    </StrictMode>,
   );
 });

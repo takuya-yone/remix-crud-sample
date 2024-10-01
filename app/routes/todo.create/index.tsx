@@ -1,14 +1,11 @@
-import { useEffect, useRef } from "react";
-import type { MetaFunction, LoaderFunction } from "@remix-run/node";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { Form } from "@remix-run/react";
-import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
+import { useEffect, useRef } from "react";
 
 export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
+  return [{ title: "New Remix App" }, { name: "description", content: "Welcome to Remix!" }];
 };
 export async function action({ request }: ActionFunctionArgs) {
   //   let formData = await request.formData();

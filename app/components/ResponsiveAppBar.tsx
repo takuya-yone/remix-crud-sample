@@ -1,11 +1,7 @@
-import { useState } from "react";
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { AppstoreOutlined, MailOutlined, SettingOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
+import { useState } from "react";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -65,12 +61,7 @@ export const ResponsiveAppBar = () => {
 
   return (
     <div className="bg-slate-200">
-      <Menu
-        onClick={onClick}
-        selectedKeys={[current]}
-        mode="horizontal"
-        items={items}
-      />
+      <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
     </div>
   );
 };

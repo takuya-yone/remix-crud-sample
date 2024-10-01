@@ -1,28 +1,16 @@
 import type { MetaFunction } from "@remix-run/node";
 
-import { Form as RemixForm } from "@remix-run/react";
-
-import {
-  typedjson,
-  useTypedLoaderData,
-  useTypedActionData,
-} from "remix-typedjson";
-import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
-import { useState } from "react";
-import type { FormProps } from "antd";
-import { DatePicker, Form, Input, Button, Checkbox, Card, Switch } from "antd";
-import { json } from "@remix-run/node";
-import { useLoaderData, useActionData } from "@remix-run/react";
+import { blue } from "@ant-design/colors";
 import { PrismaClient } from "@prisma/client";
 import type { TodoItem } from "@prisma/client";
-import { Typography } from "antd";
-import { blue } from "@ant-design/colors";
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import type { FormProps } from "antd";
+import { Button, Card, Form, Input, Switch, Typography } from "antd";
+import { typedjson, useTypedActionData, useTypedLoaderData } from "remix-typedjson";
 
 export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
+  return [{ title: "New Remix App" }, { name: "description", content: "Welcome to Remix!" }];
 };
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -77,9 +65,7 @@ export const TodoItemForm = (props: { item: TodoItem }) => {
 
   const aaa = useTypedActionData<typeof action>();
 
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
-    errorInfo
-  ) => {
+  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
@@ -120,11 +106,7 @@ export const TodoItemForm = (props: { item: TodoItem }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item<FieldType>
-          name="complete"
-          label="complete"
-          wrapperCol={{ offset: 8, span: 16 }}
-        >
+        <Form.Item<FieldType> name="complete" label="complete" wrapperCol={{ offset: 8, span: 16 }}>
           <Switch />
         </Form.Item>
 
@@ -157,21 +139,11 @@ export default function Index() {
           );
         })}
         <div className="h-[144px] w-[434px]">
-          <img
-            src="/logo-light.png"
-            alt="Remix"
-            className="block w-full dark:hidden"
-          />
-          <img
-            src="/logo-dark.png"
-            alt="Remix"
-            className="hidden w-full dark:block"
-          />
+          <img src="/logo-light.png" alt="Remix" className="block w-full dark:hidden" />
+          <img src="/logo-dark.png" alt="Remix" className="hidden w-full dark:block" />
         </div>
         <nav className="flex flex-col items-center justify-center gap-4 rounded-3xl border border-gray-200 p-6 dark:border-gray-700">
-          <p className="leading-6 text-gray-700 dark:text-gray-200">
-            What&apos;s next?
-          </p>
+          <p className="leading-6 text-gray-700 dark:text-gray-200">What&apos;s next?</p>
         </nav>
       </div>
     </div>
