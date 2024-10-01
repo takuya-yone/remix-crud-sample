@@ -9,7 +9,9 @@
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc",
-    "prisma": "prisma"
+    "prisma": "prisma",
+    "biome:dry": "biome check",
+    "biome:fix": "biome check --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
