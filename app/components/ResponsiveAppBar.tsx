@@ -64,13 +64,13 @@ export const ResponsiveAppBar = () => {
   };
 
   return (
-    <>
+    <div className="bg-slate-200">
       <Menu
         onClick={onClick}
         selectedKeys={[current]}
         mode="horizontal"
         items={items}
       />
-    </>
+    </div>
   );
 };
