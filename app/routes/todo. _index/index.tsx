@@ -8,15 +8,12 @@ import {
   useTypedActionData,
 } from "remix-typedjson";
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import { useState } from "react";
 
 import { json } from "@remix-run/node";
 import { useLoaderData, useActionData } from "@remix-run/react";
 import { PrismaClient } from "@prisma/client";
 import type { TodoItem } from "@prisma/client";
-import { Typography, TextField, Button, Checkbox, Switch } from "@mui/material";
 
 export const meta: MetaFunction = () => {
   return [
@@ -71,7 +68,7 @@ export const TodoItemForm = (props: { item: TodoItem }) => {
       <Form method="post" navigate={false}>
         <input type="hidden" id="Id" name="id" value={props.item.id} />
 
-        <TextField
+        {/* <TextField
           required
           label="Title"
           defaultValue={props.item.title}
@@ -91,7 +88,7 @@ export const TodoItemForm = (props: { item: TodoItem }) => {
           variant="contained"
         >
           Submit
-        </Button>
+        </Button> */}
       </Form>
     </div>
   );
@@ -108,7 +105,7 @@ export default function Index() {
             Welcome to <span className="sr-only">Remix</span>
           </h1>
         </header>
-        <Typography color="black">{JSON.stringify(todoItems)}</Typography>
+        {/* <Typography color="black">{JSON.stringify(todoItems)}</Typography> */}
         {todoItems.map((item, index) => {
           return (
             <div key={item.id}>
